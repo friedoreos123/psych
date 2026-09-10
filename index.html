@@ -51,6 +51,10 @@
     .category{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
     .chip{border:2px solid #ffc4d5;background:white;color:var(--pink);border-radius:20px;padding:8px 14px;font-weight:800}
     .chip.active{background:#ff8fb1;color:white;border-color:#ff8fb1}
+    .select-wrap{position:relative;max-width:420px;margin:0 auto 22px}
+    .cat-select{width:100%;padding:14px 44px 14px 20px;border-radius:22px;border:2px solid #ffc4d5;background:white;color:var(--pink);font-weight:800;font-size:16px;font-family:"Quicksand",sans-serif;appearance:none;-webkit-appearance:none;-moz-appearance:none;box-shadow:var(--shadow);cursor:pointer}
+    .cat-select:focus{outline:2px solid var(--pink2)}
+    .select-wrap::after{content:"▾";position:absolute;right:20px;top:50%;transform:translateY(-50%);color:var(--pink);font-size:18px;font-weight:800;pointer-events:none}
     .small{font-size:13px;opacity:.7}
     @media(max-width:600px){
       .logo{font-size:34px}.card{height:420px}.term{font-size:32px}.definition{font-size:18px}
@@ -64,18 +68,24 @@
   </header>
 
   <div class="tabs">
-    <button class="tab active" id="flashTab">Flash Cards</button>
+    <button class="tab active" id="flashTab"> YOU ARE GOING TO DO SO WELL!!!</button>
   </div>
 
   <section id="flashSection" class="panel">
-    <div class="category">
-      <button class="chip active" data-cat="schizo">Schizophrenia</button>
-      <button class="chip" data-cat="antipsy">Antipsychotics</button>
-      <button class="chip" data-cat="mdd">Major Depressive Disorder</button>
-      <button class="chip" data-cat="antidep">Antidepressants</button>
-      <button class="chip" data-cat="bipolar">Bipolar Disorder</button>
-      <button class="chip" data-cat="anxiety">Anxiety</button>
-      <button class="chip" data-cat="substance">Substance Abuse</button>
+    <div class="select-wrap">
+      <select id="catSelect" class="cat-select">
+        <option value="schizo">Schizophrenia</option>
+        <option value="antipsy">Antipsychotics</option>
+        <option value="mdd">Major Depressive Disorder</option>
+        <option value="antidep">Antidepressants</option>
+        <option value="bipolar">Bipolar Disorder</option>
+        <option value="anxiety">Anxiety</option>
+        <option value="substance">Substance Abuse</option>
+        <option value="memory">Disturbance in Memory</option>
+        <option value="personality">Personality Disorders</option>
+        <option value="eating">Eating Disorders</option>
+        <option value="crisis">Crisis & Crisis Intervention</option>
+      </select>
     </div>
 
     <div class="flash-wrap">
@@ -322,6 +332,60 @@ const flashSets = {
     ["Signs of Wernicke syndrome?","","Ataxia(clumsiness), confusion, ophthalmoplegia."],
     ["Signs of Korsakoff syndrome?","","Confabulation, hallucination, amnesia."],
     ["Management for Wernicke-Korsakoff?","Thiamine-rich diet.",""]
+  ],
+  memory: [
+    ["loss of DISTANT memory | inability to recall memories formed before a traumatic event","Retrograde amnesia",""],
+    ["Management for retrograde amnesia?","Reminiscence therapy (photo, music, diary, journal)",""],
+    ["loss of RECENT memory | inability to make new memories after a traumatic event","Anterograde amnesia",""],
+    ["Management for anterograde amnesia?","","Cognitive rehabilitation (memory training), Vitamin B1 supplements"],
+    ["making stories that are not true to fill the gap between memory loss","Confabulation",""]
+  ],
+  personality: [
+    ["ODD / ECCENTRIC / MAD falls under cluster?","Cluster A",""],
+    ["Distrustful, suspicious, jealous","Paranoid",""],
+    ["Social isolation and indifference (asocial)","Schizoid",""],
+    ["Superstitious, magical thinkers","Schizotypal",""],
+    ["EMOTIONAL / ERRATIC / BAD falls under cluster?","Cluster B",""],
+    ["Unpredictable mood, clings to relationship","Borderline",""],
+    ["Borderline defense mechanism?","Splitting: all good/all bad.",""],
+    ["Borderline personality has high risk for what?","Suicide.",""],
+    ["Antisocial personality","","Law breakers, no regard for right or wrong"],
+    ["Histrionic personality","","Attention seekers, dramatic and theatrical"],
+    ["Self-entitlement, denies weakness and failure","Narcissistic",""],
+    ["FEARFUL / ANXIOUS / SAD falls under cluster?","Cluster C",""],
+    ["Avoids responsibilities and social interactions","Avoidant",""],
+    ["Submissiveness (depends on others for decision making)","Dependent",""],
+    ["Extreme neatness and perfectionism","Obsessive compulsive.",""],
+    ["Management for personality disorders?","Behavioral therapy (Role Playing)",""]
+  ],
+  eating: [
+    ["Restriction of food intake with intense fear of weight gain/distorted body image.","Anorexia Nervosa",""],
+    ["Anorexia age group","12–20 years.",""],
+    ["Anorexia diagnostic duration?","3 months.",""],
+    ["Anorexia behaviors","","Calorie counting, compulsive exercise, ritualistic eating."],
+    ["Physical signs of anorexia?","","Alopecia, anemia, lanugo."],
+    ["Do anorexia clients recognize the problem?","No.",""],
+    ["Defense mechanisms associated with anorexia?","Denial/suppression.",""],
+    ["Recurrent binge eating + guilt/distress + compensatory purging.","Bulimia Nervosa",""],
+    ["Bulimia diagnostic criteria","Once weekly for 3 months.",""],
+    ["Typical body weight in bulimia?","Normal body weight.",""],
+    ["Pathognomonic sign of bulimia?","Russell's sign",""],
+    ["Common complications of bulimia?","","dental erosions (HCl acid from stomach), gastric ulcer (stress), hypokalemia (vomiting) → arrythmia, rectal bleeding (use of enema)"],
+    ["What distinguishes binge eating disorder?","","binging with no compensatory purging response to stress and trauma"],
+    ["Normal BMI range?","18.5–24.9 kg/m².",""],
+    ["Medication listed for eating disorders?","Selective Serotonin Reuptake Inhibitors - PROZAC (Flouxetine)",""]
+  ],
+  crisis: [
+    ["When coping mechanism are ineffective that results to disequilibrium.","Crisis",""],
+    ["Types of crisis","","Situationa | Adventitious / Social | Maturational / Developmental"],
+    ["Caused by unexpected event (Loss of a job / starting a new job, Death of a loved one)","Situational",""],
+    ["Caused by natural catastrophe (earthquake, fire, tornado); CRIME (ex. Rape, Murder)","Adventitious / Social",""],
+    ["Caused by expected events (menarche, marriage, pregnancy, retirement)","Maturational/developmental",""],
+    ["Duration of a crisis","4–6 weeks.",""],
+    ["Goal of crisis intervention?","To help patient return to pre-crisis level",""],
+    ["Initial crisis assessment?","Identify the precipitating event.",""],
+    ["Focus of crisis intervention?","Here and Now (GESTALT THERAPY) – focus on the PRESENT",""],
+    ["Crisis intervention approach?","Directive + supportive.",""]
   ]
 };
 
@@ -350,11 +414,8 @@ function changeCard(dir){
   index=(index+dir+flashSets[cat].length)%flashSets[cat].length;
   renderFlash();
 }
-document.querySelectorAll(".chip").forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll(".chip").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active"); cat=btn.dataset.cat; index=0; renderFlash();
-  };
+$("catSelect").addEventListener("change",(e)=>{
+  cat=e.target.value; index=0; renderFlash();
 });
 $("flashCard").onclick=()=>$("flashCard").classList.toggle("flipped");
 $("flipBtn").onclick=()=>$("flashCard").classList.toggle("flipped");
