@@ -73,6 +73,8 @@
       <button class="chip" data-cat="antipsy">Antipsychotics</button>
       <button class="chip" data-cat="mdd">Major Depressive Disorder</button>
       <button class="chip" data-cat="antidep">Antidepressants</button>
+      <button class="chip" data-cat="bipolar">Bipolar Disorder</button>
+      <button class="chip" data-cat="anxiety">Anxiety</button>
     </div>
 
     <div class="flash-wrap">
@@ -208,16 +210,77 @@ const flashSets = {
     ["Best time to take","Effectivity",""],
     ["Effectivity","after 2 – 4 weeks",""],
     ["Early indication of effectiveness","","↑ activity levels → \"suicide precaution\""],
-    ["How long should antidepressants generally continue to prevent relapse.","","About 6 months (4–9 months) even if the client already feels better"],
+    ["How long should antidepressants generally continue to prevent relapse.","","About 6 months (4–9 months) even the client already feels better"],
     ["How should antidepressants be discontinued?","TAPER! (↓ dose gradually)",""],
-    ["What is needed when shifting antidepressant classifications?","A 5–6 week washout period.",""],
+    ["What is needed when switching antidepressant classifications?","A 5–6 week washout period.",""],
     ["Why shouldn't antidepressants be combined?","To prevent serotonin syndrome/seizures.",""],
     ["When is Electroconvulsive Therapy indicated?","","when medications are ineffective, acute suicidal crisis"],
     ["Is pregnancy a contraindication","No.",""],
-    ["How often is Electroconvulsive Therapy (Last Resort | effect is immediate)","","Every other day; 6–15 sessions listed."],
+    ["How often is Electroconvulsive Therapy (Last Resort | effect is immediate)","","Every other day; 6–15 sessions"],
     ["Pre-meds for ECT","","Succinylcholine (muscle relaxant), Atropine Sulfate (Anti-cholinergic), Methohexital (Anesthesia)"],
     ["How long does the seizure last","About 30–60 seconds.",""],
     ["side effect of ECT?","Retrograde amnesia.",""]
+  ],
+  bipolar: [
+    ["What neurotransmitters are increased in bipolar disorder","Dopamine, serotonin, and norepinephrine.",""],
+    ["How long does mania last","≥1 week.",""],
+    ["How long does hypomania last","≥4 days.",""],
+    ["Manic episodes with or without major depression.","Bipolar I",""],
+    ["Major depression with hypomanic episodes.","Bipolar II",""],
+    ["Alternating depressed mood and hypomania for 2 years.","Cyclothymia",""],
+    ["Persistent mild depression for 2 years","Dysthymia",""],
+    ["What are the manic phases","","Flight of ideas, grandiosity, decreased sleep, increased talkativeness, distracted easily, ↑ goal-directed activity, Engaging in risky activities"],
+    ["Examples of risky manic behavior?","Gambling, skydiving",""],
+    ["What is lithium used for","Mood stabilization.",""],
+    ["When does lithium begin working","About 3 weeks.",""],
+    ["What laboratory test monitors lithium","Serum lithium level.",""],
+    ["Therapeutic lithium level","0.6–1.2 mEq/L.",""],
+    ["What is the maximum Therapeutic lithium level","1.5 mEq/L.",""],
+    ["What level requires dialysis","",">3 mEq/L.\t."],
+    ["lithium toxicity symptoms?","","Vomiting and diarrhea | Coarse tremors"],
+    ["Common effects of lithium?","","Polyuria and polydipsia | Fine tremors(temporary)"],
+    ["Long-term complication of lithium?","Hypothyroidism.",""],
+    ["What should the patient maintain in the diet?","","Adequate/moderate sodium intake (1500mg/day)"],
+    ["What should patients increase while taking lithium?","Fluid intake.",""],
+    ["What should patients avoid?","Strenuous activity/perspiration.",""]
+  ],
+  anxiety: [
+    ["Neurobiology","Hyperactive amygdala.",""],
+    ["Neurochemical","↓ GABA.",""],
+    ["Initial nursing action with an anxious patient","Determine your own level of anxiety.",""],
+    ["Priority with severe anxiety/panic?","Safety (stay with patient)",""],
+    ["What happens with mild(normal) anxiety?","","Increased alertness, learning is effective."],
+    ["What happens with moderate anxiety?","","Selective attention, narrowed perception, Can be redirected, Increased use of AUTOMATISM (tapping of the foot), Parasympathetic stimulation (diarrhea, urinary frequency)"],
+    ["What should the nurse do with moderate anxiety?","Redirect/refocus/ORAL anxiolytics.",""],
+    ["What happens with severe anxiety?","","Cannot function effectively or solve problems. Nausea, vomiting, diarrhea (TREMBLING / PACING ), SOMATIC s/x: chest pain, tachycardia, hyperventilation"],
+    ["What happens during panic?","","Delusions and Hallucinations, Violence and Suicide"],
+    ["What is the nursing approach during panic?","Take control; restraint if needed.",""],
+    ["Repetitive thoughts.","Obsession",""],
+    ["Repetitive actions (rituals)","Compulsion",""],
+    ["Purpose of compulsions?","Decrease anxiety.",""],
+    ["Defense mechanism in OCD?","Undoing. (doing something to relieve the guilt)",""],
+    ["Irrational fear","PHOBIC DISORDER",""],
+    ["Fear of interacting with strangers.","social phobia .",""],
+    ["Fear of inescapable places.","Agoraphobia.",""],
+    ["Fear of enclosed spaces.","claustrophobia",""],
+    ["Defense mechanisms associated with phobias?","Displacement and avoidance.",""],
+    ["Management for OCD ritual","","Allow patient to perform the ritual (DO NOT INTERRUPT) | Provide enough time for the ritual | adjust client's schedule | Gradually limit the ritual | DISTRACT patient by providing activities | COGNITIVE BEHAVIORAL Therapy"],
+    ["Recurrent pulling of one's hair resulting to hair loss","Trichotillomania",""],
+    ["Repeated picking at skin leading to lesions","Excoriation (Skin-Picking) Disorder",""],
+    ["preoccupation with imagined or slight flaws in appearance","Body Dysmorphic Disorder",""],
+    ["preoccupation that one has body odor","Olfactory Reference Syndrome",""],
+    ["difficulty discarding possessions","Hoading disorder",""],
+    ["Management for GAD (GENERALIZED ANXIETY DISORDER)","","GUIDED IMAGERY – visualizations focusing on safe, pleasant scenes | GROUNDING TECHNIQUE - using the SENSES to sabotage the MIND."],
+    ["Visiting multiple healthcare providers","Doctor shopping",""],
+    ["Unconcern about the physical symptom","la belle indifference",""],
+    ["Relief from anxiety or guilt","Primary gain",""],
+    ["Nursing interventions for SOMATOFORM DISORDERS","","Rule out any possible organic of physiologic cause | Attend to physical complaints | Consistent care giver must be provided | Encourage verbalization of feeling"],
+    ["Intentional induction of illness.","FACTITIOUS DISORDER",""],
+    ["causes of PTSD","","Rape, war, calamities, survivor's guilt."],
+    ["PTSD manifestations lasts how long",">1 month.",""],
+    ["PTSD symptoms?","","Hypervigilance, nightmares, flashbacks, avoidance, dissociation, detachment."],
+    ["What should the nurse do before touching a trauma client?","Ask permission.",""],
+    ["PTSD treatment","SSRIs and psychotherapy.",""]
   ]
 };
 
