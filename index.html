@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAYK!!</title>
+  <link rel="icon" type="image/png" href="mif.png">
+<link rel="icon" type="image/png" href="ww.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --pink:#ff5c8a; --pink2:#ff8fb1; --light:#fff0f5; --lighter:#fff9fb;
+      --dark:#63263d; --green:#48b886; --red:#e95d73; --shadow:0 12px 30px rgba(143,54,86,.13);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Quicksand",sans-serif;background:linear-gradient(135deg,#fff0f5,#ffe2ec);color:var(--dark);min-height:100vh}
+    button{font:inherit;cursor:pointer}
+    .app{max-width:1100px;margin:auto;padding:28px 18px 50px}
+    header{text-align:center;margin-bottom:24px}
+    .logo{font-family:"Baloo 2";font-size:42px;font-weight:800;color:var(--pink);margin:0}
+    .subtitle{margin:0;font-weight:600}
+    .tabs{display:flex;justify-content:center;gap:12px;margin:22px 0}
+    .tab{border:0;background:white;color:var(--pink);padding:12px 26px;border-radius:30px;font-weight:800;box-shadow:var(--shadow)}
+    .tab.active{background:var(--pink);color:white}
+    .panel{background:rgba(255,255,255,.82);border-radius:28px;padding:25px;box-shadow:var(--shadow)}
+    .hidden{display:none!important}
+    .flash-wrap{text-align:center}
+    .progress{font-weight:800;margin-bottom:14px}
+    .card{height:430px;perspective:1400px;max-width:760px;margin:0 auto 20px;overflow:visible}
+    .card-inner{width:100%;height:100%;position:relative;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d;will-change:transform}
+    .card.flipped .card-inner{transform:rotateY(180deg)}
+    .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:34px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px;background:#fff;border:4px solid #ffd0de;box-shadow:0 18px 40px rgba(143,54,86,.15);overflow:hidden}
+    .face::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:#ffe3ed;top:-65px;left:-55px;opacity:.8}
+    .face::after{content:"";position:absolute;width:110px;height:110px;border-radius:50%;background:#fff1f6;bottom:-45px;right:-35px}
+    .front{transform:rotateY(0deg);z-index:2}
+    .back{transform:rotateY(180deg);background:linear-gradient(145deg,#fff9fb,#ffe8f0);z-index:1}
+    .label{font-size:14px;font-weight:800;color:var(--pink);text-transform:uppercase;letter-spacing:1.5px;position:relative;z-index:2}
+    .term{font-family:"Baloo 2";font-size:44px;font-weight:800;margin:12px 0;color:#ff5c8a;position:relative;z-index:2;text-shadow:0 3px 0 #ffd9e5;line-height:1.15}
+    .definition{font-size:22px;line-height:1.6;max-width:650px;font-weight:600;position:relative;z-index:2}
+    .hint{font-size:14px;opacity:.7;margin-top:15px;position:relative;z-index:2}
+    .sparkles{position:absolute;inset:0;pointer-events:none;z-index:1}
+    .sparkles span{position:absolute;color:#ff8fb1;font-size:20px;animation:float 3s ease-in-out infinite}
+    .sparkles span:nth-child(1){top:20%;right:12%}
+    .sparkles span:nth-child(2){bottom:20%;left:12%;animation-delay:.7s}
+    .sparkles span:nth-child(3){top:35%;left:8%;font-size:14px;animation-delay:1.2s}
+    @keyframes float{50%{transform:translateY(-8px) rotate(8deg)}}
+    .controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+    .btn{border:0;border-radius:22px;padding:12px 22px;font-weight:800;background:var(--pink);color:white;box-shadow:0 6px 14px rgba(255,92,138,.22)}
+    .btn.secondary{background:white;color:var(--pink);border:2px solid #ffc2d4}
+    .category{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+    .chip{border:2px solid #ffc4d5;background:white;color:var(--pink);border-radius:20px;padding:8px 14px;font-weight:800}
+    .chip.active{background:#ff8fb1;color:white;border-color:#ff8fb1}
+    .small{font-size:13px;opacity:.7}
+    @media(max-width:600px){
+      .logo{font-size:34px}.card{height:420px}.term{font-size:32px}.definition{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1 class="logo">✨ PSYCH ✨</h1>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" id="flashTab">Flash Cards</button>
+  </div>
+
+  <section id="flashSection" class="panel">
+    <div class="category">
+      <button class="chip active" data-cat="schizo">Schizophrenia</button>
+      <button class="chip" data-cat="antipsy">Antipsychotics</button>
+      <button class="chip" data-cat="eps">EPS</button>
+    </div>
+
+    <div class="flash-wrap">
+      <div class="progress" id="flashProgress"></div>
+      <div class="card" id="flashCard">
+        <div class="card-inner">
+          <div class="face front">
+            <div class="sparkles"><span>✦</span><span>♡</span><span>✧</span></div>
+            <div class="definition" id="frontText"></div>
+            <div class="hint">Click the card to reveal the answer ✨</div>
+          </div>
+          <div class="face back">
+            <div class="sparkles"><span>♡</span><span>✦</span><span>✧</span></div>
+            <div class="label">Answer 🎀</div>
+            <div class="term" id="backText"></div>
+            <div class="definition" id="backDefinition"></div>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="btn secondary" id="prevBtn">← Previous</button>
+        <button class="btn" id="flipBtn">Flip Card </button>
+        <button class="btn secondary" id="nextBtn">Next →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const flashSets = {
+  schizo: [
+    ["Cause of positive signs","↑ Dopamine",""],
+    ["False sensory perceptions","Hallucinations",""],
+    ["Types of hallucinations?","","Visual / Olfactory / Auditory (most dangerous)"],
+    ["False beliefs or thoughts","Delusions",""],
+    ["Belief of superiority or invulnerability","Grandiose",""],
+    ["What is a somatic delusion?","","Belief that bodily functions are abnormal."],
+    ["Belief that a part of the body is missing","Nihilistic",""],
+    ["Belief that another person is in love with them","Erotomania",""],
+    ["Belief that others are trying to harm them","Persecutory",""],
+    ["Giving meaning to events/actions of others","Ideas of reference (referential)",""],
+    ["Excessive details before finally answering","Circumstantiality",""],
+    ["Lack of focus — never reaches an answer","Tangentiality",""],
+    ["Fragmented, disconnected thoughts","Looseness of association",""],
+    ["Flight of ideas is seen in which disorder?","Bipolar disorder (manic episode)",""],
+    ["Coining of new words","Neologisms",""],
+    ["Word salad without rhyme","Schizophasia",""],
+    ["Mixing words WITH rhyme","Clang association",""],
+    ["Repeating the words of others","Echolalia",""],
+    ["Repeating one's own words","Palilalia",""],
+    ["Repeating a phrase","Verbigeration",""],
+    ["Stuck on a single topic","Perseveration",""],
+    ["Cause of negative signs","↑ Serotonin",""],
+    ["Lack of motivation (early sign)","Avolition",""],
+    ["Lack of relationships","Asociality",""],
+    ["Lack of pleasure","Anhedonia",""],
+    ["Lack of speech","Alogia",""],
+    ["Absence of movement","Catatonia",""],
+    ["Waxy flexibility (↓ movement)","Catatonic stupor",""],
+    ["Agitation (↑ movement)","Catatonic excitability",""],
+    ["No emotional response","Flat affect",""],
+    ["Minimal emotional response (50/50)","Blunt affect",""],
+    ["Single emotional response","Restricted affect",""],
+    ["Sudden shift in emotions","Labile affect",""],
+    ["Incongruent emotions","Inappropriate affect",""],
+    ["Internal emotion (e.g. feeling happy)","Mood",""],
+    ["External expression (e.g. smiling)","Affect",""],
+    ["≥2 signs, with ≥1 month duration","DSM-5-TR Diagnostic Criteria",""],
+    ["5 core symptoms of schizophrenia","","Hallucinations, delusions, disorganized speech, disorganized behavior, negative symptoms."],
+    ["Phases of schizophrenia?","","Prodromal → Active → Residual"],
+    ["Behavioral and emotional changes — which phase?","Prodromal phase",""],
+    ["Thought and cognitive disturbances — which phase?","Active phase",""],
+    ["Recovery, absence of acute symptoms — which phase?","Residual phase",""],
+    ["The 4 A's of Schizophrenia","","Autism (apathy/indifference), Ambivalence (2 opposing feelings), Abnormal affect, Associative looseness"]
+  ],
+  antipsy: [
+    ["1st generation antipsychotics — mechanism & use","","Typical/conventional; blocks dopamine receptors; treats + signs; NOT recommended for elderly"],
+    ["1st generation medications","","Chlorpromazine, thioridazine, fluphenazine, HALOPERIDOL, loxapine, molindone"],
+    ["1st generation major side effect","Pseudoparkinsonism",""],
+    ["2nd generation antipsychotics — mechanism & use","","Atypical; blocks dopamine & serotonin receptors; treats +/- signs; SAFE for elderly (>65 y/o)"],
+    ["2nd generation medications","","Olanzapine, quetiapine, clozapine, risperidone, ziprasidone, lurasidone"],
+    ["2nd generation has a lower risk of...","Pseudoparkinsonism",""],
+    ["3rd generation antipsychotics — mechanism & use","","Dopamine system stabilizers; partially blocks dopamine receptors; treats + signs; fewer side effects"],
+    ["3rd generation medications","Aripiprazole, brexpiprazole",""],
+    ["Increase fluid & fiber in the diet — for which side effect?","Constipation",""],
+    ["Monitor WBC, report fever/sore throat — for which side effect?","Agranulocytosis",""],
+    ["Sugarless hard candy or gum — for which side effect?","Tooth decay",""],
+    ["Sugarless hard candy/gum for ↑ salivation — for which side effect?","Dry mouth (xerostomia)",""],
+    ["Change position gradually — for which side effect?","Orthostatic hypotension",""],
+    ["Use cotton underwear — for which side effect?","Galactorrhea",""],
+    ["Avoid direct sunlight; use sunglasses, umbrella, SPF 25 — for which side effect?","Photosensitivity",""],
+    ["Report immediately to physician — for which side effect?","Arrhythmias",""],
+    ["Lessen sugary food/beverage intake — for which side effect?","Weight gain (↑ appetite)",""],
+    ["Avoid driving or operating machinery — for which side effect?","Sedation",""]
+  ],
+  eps: [
+    ["↓ Dopamine and ↑ acetylcholine — what condition?","EPS (Extrapyramidal Symptoms)",""],
+    ["Uncontrollable muscle spasms (dysphagia, oculogyric crisis, torticollis)","Dystonia",""],
+    ["Agitation / intense need to move","Akathisia",""],
+    ["First-line treatment for akathisia","Propranolol",""],
+    ["Tremors and unstable gait","Pseudoparkinsonism",""],
+    ["EPS treatment medications","","Akineton (biperidine), Benadryl (diphenhydramine), Cogentin (benztropine), Parlodel (bromocriptine), Artane (trihexyphenidyl), Propranolol (beta blocker)"]
+  ]
+};
+
+let cat="schizo", index=0;
+
+const $=id=>document.getElementById(id);
+function renderFlash(){
+  const item=flashSets[cat][index];
+  const card=$("flashCard");
+
+  card.classList.remove("flipped");
+  card.style.pointerEvents="none";
+
+  // Wait for the flip state to visually reset before replacing the content.
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      $("flashProgress").textContent=`Card ${index+1} of ${flashSets[cat].length}`;
+      $("frontText").textContent=item[0];
+      $("backText").textContent=item[1]||"";
+      $("backDefinition").textContent=item[2]||"";
+      card.style.pointerEvents="auto";
+    });
+  });
+}
+function changeCard(dir){
+  index=(index+dir+flashSets[cat].length)%flashSets[cat].length;
+  renderFlash();
+}
+document.querySelectorAll(".chip").forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll(".chip").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active"); cat=btn.dataset.cat; index=0; renderFlash();
+  };
+});
+$("flashCard").onclick=()=>$("flashCard").classList.toggle("flipped");
+$("flipBtn").onclick=()=>$("flashCard").classList.toggle("flipped");
+$("prevBtn").onclick=()=>changeCard(-1);
+$("nextBtn").onclick=()=>changeCard(1);
+
+renderFlash();
+</script>
+</body>
+</html>
